@@ -8,7 +8,7 @@ enum mode {
     TEST = 2
 };
 
-enum error {
+enum error {  // TODO rename
     ZERO = 0
 };
 
@@ -31,13 +31,21 @@ typedef struct {
 } Roots;
 
 int test_mode ();
-void input_square (Coefficients* var_coef);                             // ввод для квадратного уравнения
-int solve_dispetcher (Coefficients* var_coef, Roots* var_roots);        // диспетчер для квадратного(вдруг оно преобразуется к линейному)
-int solve_linear (double a, double b, Roots* var_roots);                // решение линейного уравнения
-int solve_square (double a, double b, double c, Roots* var_roots);      // решение квадратного
+
+void input_square (Coefficients* var_coef);                              // ввод для квадратного уравнения
+
+int solve_dispetcher (Coefficients* var_coef, Roots* var_roots);         // диспетчер для квадратного(вдруг оно преобразуется к линейному)
+
+int solve_linear (double a, double b, Roots* var_roots);                 // решение линейного уравнения
+
+int solve_square (double a, double b, double c, Roots* var_roots);       // решение квадратного
+
 bool is_zero (double value);                                             // проверка на ноль
-bool compair_number (double value_1, double value_2);
-bool compair_number_reverse (double value_1, double value_2);
-void clean_buffer ();
-void print_roots (int nRoots, Roots* var_roots);                        // вывод решений                                                  // чистка буфера
+
+bool compare_number (double value_1, double value_2);
+
+void clean_buffer ();                                                    // чистка буфера
+
+void print_roots (int nRoots, const Roots* var_roots);                   // вывод решений
+
 #endif // KVADRATKA_H

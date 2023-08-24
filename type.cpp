@@ -12,19 +12,20 @@ int test_mode () {
 
     int type_mode = 0;
 
-    while (scanf ("%d", &type_mode) != 1) {
+    do {
+        scanf ("%d", &type_mode);
         if (type_mode != SQUARE && type_mode != TEST)
             printf ("Ты ошибся, давай снова ");
-        else
-            break;
 
         clean_buffer();
-    }
+    } while (type_mode != SQUARE && type_mode != TEST);
 
     return type_mode;
 }
 
 void input_square (Coefficients* var_coef) {
+    assert (var_coef != NULL);
+
     printf ("Введи коэффициенты для квадратного уравнения (ax^2 + bx + c = 0): ");
 
     while (scanf ("%lg %lg %lg", &var_coef->a, &var_coef->b, &var_coef->c) != 3)
@@ -57,7 +58,7 @@ int solve_linear (double a, double b, Roots* var_roots) {
     };
 }
 
-int solve_dispetcher (Coefficients* var_coef, Roots* var_roots) { // TODO check for NULL ptr
+int solve_dispetcher (Coefficients* var_coef, Roots* var_roots) {
     assert (isfinite (var_coef->a));
     assert (isfinite (var_coef->b));
     assert (isfinite (var_coef->c));
@@ -72,25 +73,23 @@ int solve_dispetcher (Coefficients* var_coef, Roots* var_roots) { // TODO check 
         if (is_zero (var_coef->b))
         {
             if (is_zero (var_coef->c))
+            {
                 return INFINITY_ROOTS;
+            }
+
+            return NO_ROOTS;
         }
         else
         {
             printf ("Твоё уравнение имеет линейный вид.\n");
 
-            int nRoots = solve_linear (var_coef->b, var_coef->c, var_roots);
-
-            return nRoots;
+            return solve_linear (var_coef->b, var_coef->c, var_roots);
         }
     }
     else
     {
-        int nRoots = solve_square (var_coef->a, var_coef->b, var_coef->c, var_roots);
-
-        return nRoots;
+        return solve_square (var_coef->a, var_coef->b, var_coef->c, var_roots);
     }
-
-    return 0;
 }
 
 int solve_square (double a, double b, double c, Roots* var_roots) {
@@ -104,7 +103,7 @@ int solve_square (double a, double b, double c, Roots* var_roots) {
 
     double disc = b * b - 4 * a * c;
 
-    if (compair_number(disc, 0))
+    if (compare_number(disc, 0))
     {
         double sqrt_disc = sqrt (disc);
 
@@ -113,7 +112,7 @@ int solve_square (double a, double b, double c, Roots* var_roots) {
 
         return TWO_ROOTS;
     }
-    else if (compair_number_reverse(disc, 0) && disc >= 0)
+    else if (is_zero(disc))
     {
         var_roots->x1 = var_roots->x2 = - b / (2 * a);
 
@@ -124,15 +123,19 @@ int solve_square (double a, double b, double c, Roots* var_roots) {
 }
 
 bool is_zero (double value) {
+    assert (!isnan (value));
+    assert (isfinite (value));
+
     return (fabs (value) < EPSILON);
 }
 
-bool compair_number (double value_1, double value_2) {
-    return ((value_1 - value_2) > EPSILON);
-}
+bool compare_number (double value_1, double value_2) {
+    assert (!isnan (value_1));
+    assert (isfinite (value_1));
+    assert (!isnan (value_2));
+    assert (isfinite (value_2));
 
-bool compair_number_reverse (double value_1, double value_2) {
-    return ((value_1 - value_2) < EPSILON);
+    return ((value_1 - value_2) > EPSILON);
 }
 
 void clean_buffer () {
@@ -141,8 +144,11 @@ void clean_buffer () {
     while ((ch = getchar () != '\n') && (ch != EOF)) {}
 }
 
-void print_roots (int nRoots, Roots* var_roots) {
+void print_roots (int nRoots, const Roots* var_roots) {
+    assert (var_roots != NULL);
+
     printf ("Сейчас решим! Это же вам не ЕГЭ!..\n");
+
     Sleep (1000);
 
     switch(nRoots)
