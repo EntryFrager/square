@@ -13,7 +13,7 @@ int main (int argc, char *argv[]) {
 
     printf ("Ёто программа решающа€ квадратные уравнени€ (ax^2 + bx + c = 0).\n");
 
-    int type_mode = test_mode();
+    int type_mode = test_mode ();
 
     int nRoots = 0;
 
@@ -25,7 +25,7 @@ int main (int argc, char *argv[]) {
     }
     else
     {
-        test(argv);
+        test (argv);
     }
 
     return 0;

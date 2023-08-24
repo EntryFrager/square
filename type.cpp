@@ -138,7 +138,7 @@ bool compair_number_reverse (double value_1, double value_2) {
 void clean_buffer () {
     int ch = 0;
 
-    while ((ch = getchar() != '\n') && (ch != EOF)) {}
+    while ((ch = getchar () != '\n') && (ch != EOF)) {}
 }
 
 void print_roots (int nRoots, Roots* var_roots) {
