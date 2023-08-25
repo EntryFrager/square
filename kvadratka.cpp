@@ -1,20 +1,21 @@
 /// @file kvadratka.cpp
 
-#include "kvadratka.h"
-#include "test.h"
-#include "Error.h"
 #include <stdio.h>
 #include <math.h>
 #include <TXLib.h>
 #include <windows.h>
 #include <assert.h>
+#include "kvadratka.h"
+#include "test.h"
+#include "error.h"
 
+#if 0
 /**
  * Function prompting the user to solve a quadratic equation or start testing.
  * @param[out] type_mode
 */
 
-#if 0
+
 int test_mode () {
     printf ("Ты хочешь решить квадратное уравнение (напиши 1) или запустить тестирование (напиши 2)?\n"
             "Твой выбор: ");
@@ -41,24 +42,40 @@ int test_mode () {
  * @param[out] var_roots
 */
 
-int solve_linear (const double a, const double b, Roots* var_roots) {
-    assert (isfinite (a));
-    assert (isfinite (b));
-    assert (var_roots != NULL);
+int solve_linear (const double a, const double b, Roots* var_roots)
+{
+    if (my_assert (isfinite (a)))
+    {
+        return ERR_ISFINITE;
+    }
+
+    if (my_assert (isfinite (b)))
+    {
+        return ERR_ISFINITE;
+    }
+
+    if (my_assert (var_roots != NULL))
+    {
+        return ERR_NULL;
+    }
 
     if (is_zero (a))
     {
         if (is_zero (b))
+        {
             return INFINITY_ROOTS;
+        }
         else
+        {
             return NO_ROOTS;
+        }
     }
     else
     {
         var_roots->x1 = var_roots->x2 = - b / a;
 
         return ONE_ROOTS;
-    };
+    }
 }
 
 /**
@@ -68,30 +85,38 @@ int solve_linear (const double a, const double b, Roots* var_roots) {
  * @param[out] nRoots
 */
 
-int solve_dispetcher (const Coefficients* var_coef, Roots* var_roots) {
-    assert (isfinite (var_coef->a));
-    assert (isfinite (var_coef->b));
-    assert (isfinite (var_coef->c));
-    assert (var_coef != NULL);
-    assert (var_roots != NULL);
+int solve_dispetcher (const Coefficients* var_coef, Roots* var_roots)
+{
+    if (my_assert (isfinite (var_coef->a)))
+    {
+        return ERR_ISFINITE;
+    }
+
+    if (my_assert (isfinite (var_coef->b)))
+    {
+        return ERR_ISFINITE;
+    }
+
+    if (my_assert (isfinite (var_coef->c)))
+    {
+        return ERR_ISFINITE;
+    }
+
+    if (my_assert (var_coef != NULL))
+    {
+        return ERR_NULL;
+    }
+
+    if (my_assert (var_roots != NULL))
+    {
+        return ERR_NULL;
+    }
 
     if (is_zero (var_coef->a))
     {
-        if (is_zero (var_coef->b))
-        {
-            if (is_zero (var_coef->c))
-            {
-                return INFINITY_ROOTS;
-            }
+        printf ("Твоё уравнение имеет линейный вид.\n");
 
-            return NO_ROOTS;
-        }
-        else
-        {
-            printf ("Твоё уравнение имеет линейный вид.\n");
-
-            return solve_linear (var_coef->b, var_coef->c, var_roots);
-        }
+        return solve_linear (var_coef->b, var_coef->c, var_roots);
     }
     else
     {
@@ -111,11 +136,36 @@ int solve_dispetcher (const Coefficients* var_coef, Roots* var_roots) {
  * @param[out] nRoots
 */
 
-int solve_square (const double a, const double b, const double c, Roots* var_roots) {
-    assert (isfinite (a));
-    assert (isfinite (b));
-    assert (isfinite (c));
-    assert (var_roots != NULL);
+int solve_square (const double a, const double b, const double c, Roots* var_roots)
+{
+    if (my_assert (isfinite (a)))
+    {
+        return ERR_ISFINITE;
+    }
+
+    if (my_assert (isfinite (b)))
+    {
+        return ERR_ISFINITE;
+    }
+
+    if (my_assert (isfinite (c)))
+    {
+        return ERR_ISFINITE;
+    }
+
+    if (my_assert (var_roots != NULL))
+    {
+        return ERR_NULL;
+    }
+
+    if (is_zero (c))
+    {
+        var_roots->x1 = 0;
+
+        var_roots->x2 = -b / a;
+
+        return TWO_ROOTS
+    }
 
     double disc = b * b - 4 * a * c;
 
@@ -124,6 +174,7 @@ int solve_square (const double a, const double b, const double c, Roots* var_roo
         double sqrt_disc = sqrt (disc);
 
         var_roots->x1 = (- b - sqrt_disc) / (2 * a);
+
         var_roots->x2 = (- b + sqrt_disc) / (2 * a);
 
         return TWO_ROOTS;

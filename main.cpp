@@ -1,13 +1,13 @@
 /// @file main.cpp
 
-#include "kvadratka.h"
-#include "test.h"
-#include "Error.h"
 #include <stdio.h>
 #include <math.h>
 #include <TXLib.h>
 #include <windows.h>
 #include <assert.h>
+#include "kvadratka.h"
+#include "test.h"
+#include "error.h"
 
 const char default_tests_src[] = "Test.txt";            ///< Default test file for testing the program.
 
@@ -16,7 +16,8 @@ const char default_tests_src[] = "Test.txt";            ///< Default test file f
  *  @param[in] argv
 */
 
-int main (int argc, char *argv[]) {
+int main (int argc, const char *argv[])
+{
     Roots var_roots = {};
     Coefficients var_coef = {};
 
@@ -33,24 +34,32 @@ int main (int argc, char *argv[]) {
             if (strlen (argv[i]) != 2)
             {
                 fprintf (stderr, "ERROR: ты ввел неправильныый формат параметра...\n");
+
                 return 0;
             }
-            switch (*(argv[i] + 1))
+
+            switch (argv[i][1])
             {
                 case TEST:
                 {
                     test_mode = 1;
                 }
                 break;
+
                 case HELP:
                 {
                     printf_help ();
+
                     return 0;
                 }
                 break;
+
                 default:
+                {
                     fprintf (stderr, "ERROR: ты ввел неверный параметр...\n");
+
                     return 0;
+                }
             }
         }
         else
@@ -79,6 +88,10 @@ int main (int argc, char *argv[]) {
         input_square (&var_coef);
 
         int nRoots = solve_dispetcher (&var_coef, &var_roots);
+        if (nRoots == ERR_ASSERT)
+        {
+            fprintf(stderr, "%s", error_str (ERR_ASSERT));
+        }
 
         print_roots (nRoots, &var_roots);
     }

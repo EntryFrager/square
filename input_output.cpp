@@ -1,24 +1,23 @@
 /// @file input_output
 
-#include "kvadratka.h"
-#include "test.h"
-#include "Error.h"
 #include <stdio.h>
 #include <math.h>
 #include <TXLib.h>
 #include <windows.h>
 #include <assert.h>
+#include "kvadratka.h"
+#include "test.h"
+#include "error.h"
 
 /// Function for displaying information about the program.
 
-void printf_help () {
+void printf_help ()
+{
     printf("Опции:\n");
 
-    printf ("\t-h\t\tотображение информации\n");
-
-    printf ("\t-t\t\tтестирование программы с дефолтным файлом\n");
-
-    printf ("\t-t filename.txt\tтестирование программы со своим файлом");
+    printf ("\t" "-h"              "\t\t" "отображение информации\n");
+    printf ("\t" "-t"              "\t\t" "тестирование программы с дефолтным файлом\n");
+    printf ("\t" "-t filename.txt" "\t"   "тестирование программы со своим файлом");
 
 }
 
@@ -28,8 +27,12 @@ void printf_help () {
  * @param[out] var_coef
 */
 
-void input_square (Coefficients* var_coef) {
-    assert (var_coef != NULL);
+void input_square (Coefficients* var_coef)
+{
+    if (my_assert (var_coef != NULL))
+    {
+        return ERR_NULL;
+    }
 
     printf ("Введи коэффициенты для квадратного уравнения (ax^2 + bx + c = 0): ");
 
@@ -48,8 +51,12 @@ void input_square (Coefficients* var_coef) {
  * @param[out] roots
 */
 
-void print_roots (const int nRoots, const Roots* var_roots) {
-    assert (var_roots != NULL);
+void print_roots (const int nRoots, const Roots* var_roots)
+{
+    if (my_assert (var_roots != NULL))
+    {
+        return ERR_NULL;
+    }
 
     printf ("Сейчас решим! Это же вам не ЕГЭ!..\n");
 

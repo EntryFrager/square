@@ -28,24 +28,24 @@ typedef struct {                            ///< A structure containing the root
     double x2;                              ///< Bigger root.
 } Roots;
 
-void printf_help();                                                      ///< Displaying information about a file.
+void printf_help ();                                                                 ///< Displaying information about a file.
 
-int test_mode ();                                                        ///< Mode selection.
+int test_mode ();                                                                   ///< Mode selection.
 
-void input_square (Coefficients* var_coef);                              ///< Entering the coefficients of a quadratic equation.
+void input_square (Coefficients* var_coef);                                         ///< Entering the coefficients of a quadratic equation.
 
-int solve_dispetcher (const Coefficients* var_coef, Roots* var_roots);         ///< Quadratic Equation Manager.
+int solve_dispetcher (const Coefficients* var_coef, Roots* var_roots);              ///< Quadratic Equation Manager.
 
 int solve_linear (const double a, const double b, Roots* var_roots);                 ///< Function for solving a linear equation.
 
 int solve_square (const double a, double b, const double c, Roots* var_roots);       ///< Function for solving a quadratic equation.
 
-bool is_zero (const double value);                                             ///< Checking numbers for zero.
+bool is_zero (const double value);                                                   ///< Checking numbers for zero.
 
 bool compare_number (const double value_1, const double value_2);                    ///< Number Comparison.
 
-void clean_buffer ();                                                    ///< Buffer cleaning function.
+void clean_buffer ();                                                                ///< Buffer cleaning function.
 
-void print_roots (const int nRoots, const Roots* var_roots);                   ///< Derivation of solutions.
+void print_roots (const int nRoots, const Roots* var_roots);                         ///< Derivation of solutions.
 
 #endif // KVADRATKA_H

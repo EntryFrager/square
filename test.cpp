@@ -1,13 +1,13 @@
 /// @file test.cpp
 
-#include "kvadratka.h"
-#include "test.h"
-#include "Error.h"
 #include <stdio.h>
 #include <math.h>
 #include <TXLib.h>
 #include <windows.h>
 #include <assert.h>
+#include "kvadratka.h"
+#include "test.h"
+#include "error.h"
 
 /**
  * Function for reading test data.
@@ -16,13 +16,24 @@
  * @param[in] fp
 */
 
-int data_test (Coefficients* var_coef, Test_data_roots* data_roots, FILE *fp) {
+int data_test (Coefficients* var_coef, Test_data_roots* data_roots, FILE *fp)
+{
+    if (my_assert (var_coef != NULL))
+    {
+        return ERR_NULL;
+    }
 
-    assert (var_coef != NULL);
-    assert (data_roots != NULL);
-    assert (fp != NULL);
+    if (my_assert (data_roots != NULL))
+    {
+        return ERR_NULL;
+    }
 
-    if (fscanf (fp, "%lg %lg %lg %lg %lg %d", &var_coef->a, &var_coef->b, &var_coef->c,
+    if (my_assert (fp != NULL))
+    {
+        return ERR_NULL;
+    }
+
+    if (fscanf (fp, "COEFF %lg %lg %lg %lg %lg %d", &var_coef->a, &var_coef->b, &var_coef->c,
         &data_roots->x1Ref, &data_roots->x2Ref, &data_roots->nRootsRef) != 6)
     {
         return ERR_FCOEF;
@@ -40,9 +51,12 @@ int data_test (Coefficients* var_coef, Test_data_roots* data_roots, FILE *fp) {
  * @param[out] code_error
 */
 
-int test (const char *filename) {
-
-    assert (filename != NULL);
+int test (const char *filename)
+{
+    if (my_assert (filename != NULL))
+    {
+        return ERR_NULL;
+    }
 
     Test_data_roots data_roots = {};
     Roots var_roots = {};
@@ -69,10 +83,12 @@ int test (const char *filename) {
         }
     }
 
-    if (test_success == TESTS_CNT) {
+    if (test_success == TESTS_CNT)
+    {
         printf ("Тестирование прошло успешно\n");
     }
-    else {
+    else
+    {
         printf ("Где-то допущена ошибка\n");
     }
 
@@ -92,23 +108,36 @@ int test (const char *filename) {
  * @param[out] test_result
 */
 
-int test_solve_square (const Coefficients* var_coef, const Test_data_roots* data_roots, Roots* var_roots) {
+int test_solve_square (const Coefficients* var_coef, const Test_data_roots* data_roots, Roots* var_roots)
+{
+    if (my_assert (var_coef != NULL))
+    {
+        return ERR_NULL;
+    }
 
-    assert (var_coef != NULL);
-    assert (data_roots != NULL);
-    assert (var_roots != NULL);
+    if (my_assert (data_roots != NULL))
+    {
+        return ERR_NULL;
+    }
+
+    if (my_assert (var_roots != NULL))
+    {
+        return ERR_NULL;
+    }
 
     int nRoots = solve_dispetcher (var_coef, var_roots);
 
-    if (compare_number(nRoots, data_roots->nRootsRef)    ||
-        compare_number(var_roots->x1, data_roots->x1Ref) ||
-        compare_number(var_roots->x2, data_roots->x2Ref)) {
+    if (compare_number (nRoots, data_roots->nRootsRef)    ||
+        compare_number (var_roots->x1, data_roots->x1Ref) ||
+        compare_number (var_roots->x2, data_roots->x2Ref))
+    {
         printf ("ERROR: x1 = %lg, x2 = %lg, nRoots = %d, exected: x1Ref = %lg, x2Ref = %lg, nRootsRef = %d\n",
-            var_roots->x1, var_roots->x2, nRoots, data_roots->x1Ref, data_roots->x2Ref, data_roots->nRootsRef);
+                var_roots->x1, var_roots->x2, nRoots, data_roots->x1Ref, data_roots->x2Ref, data_roots->nRootsRef);
 
         return 0;
     }
-    else {
+    else
+    {
         printf ("Test-OK\n");
 
         return 1;
