@@ -6,8 +6,8 @@
 const double EPSILON = 1e-10;               ///< Constant needed to compare numbers of type double.
 
 enum mode {                                 ///< Arguments specifying the program's behavior.
-    SQUARE = 1,                             ///< Argument for quadratic equation.
-    TEST = 2                                ///< Test argument.
+    TEST = 't',                             ///< Test argument.
+    HELP = 'h'                              ///< Argument for options.
 };
 
 enum roots {                                ///< Arguments specifying the number of roots.
@@ -34,18 +34,18 @@ int test_mode ();                                                        ///< Mo
 
 void input_square (Coefficients* var_coef);                              ///< Entering the coefficients of a quadratic equation.
 
-int solve_dispetcher (Coefficients* var_coef, Roots* var_roots);         ///< Quadratic Equation Manager.
+int solve_dispetcher (const Coefficients* var_coef, Roots* var_roots);         ///< Quadratic Equation Manager.
 
-int solve_linear (double a, double b, Roots* var_roots);                 ///< Function for solving a linear equation.
+int solve_linear (const double a, const double b, Roots* var_roots);                 ///< Function for solving a linear equation.
 
-int solve_square (double a, double b, double c, Roots* var_roots);       ///< Function for solving a quadratic equation.
+int solve_square (const double a, double b, const double c, Roots* var_roots);       ///< Function for solving a quadratic equation.
 
-bool is_zero (double value);                                             ///< Checking numbers for zero.
+bool is_zero (const double value);                                             ///< Checking numbers for zero.
 
-bool compare_number (double value_1, double value_2);                    ///< Number Comparison.
+bool compare_number (const double value_1, const double value_2);                    ///< Number Comparison.
 
 void clean_buffer ();                                                    ///< Buffer cleaning function.
 
-void print_roots (int nRoots, const Roots* var_roots);                   ///< Derivation of solutions.
+void print_roots (const int nRoots, const Roots* var_roots);                   ///< Derivation of solutions.
 
 #endif // KVADRATKA_H

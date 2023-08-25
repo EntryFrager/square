@@ -8,7 +8,6 @@
 #include <TXLib.h>
 #include <windows.h>
 #include <assert.h>
-#include <string.h>
 
 const char default_tests_src[] = "Test.txt";            ///< Default test file for testing the program.
 
@@ -31,26 +30,26 @@ int main (int argc, char *argv[]) {
     {
         if (argv[i][0] == '-')
         {
-            if (strlen(argv[i]) != 2)
+            if (strlen (argv[i]) != 2)
             {
-                printf("ERROR: ты ввел неправильныый формат параметра...\n");
+                fprintf (stderr, "ERROR: ты ввел неправильныый формат параметра...\n");
                 return 0;
             }
             switch (*(argv[i] + 1))
             {
-                case 't':
+                case TEST:
                 {
                     test_mode = 1;
                 }
                 break;
-                case 'h':
+                case HELP:
                 {
                     printf_help ();
                     return 0;
                 }
                 break;
                 default:
-                    printf("ERROR: ты ввел неверный параметр...\n");
+                    fprintf (stderr, "ERROR: ты ввел неверный параметр...\n");
                     return 0;
             }
         }
@@ -72,7 +71,7 @@ int main (int argc, char *argv[]) {
 
         if (code_error != 0)
         {
-            printf("%s", error_str (code_error));
+            fprintf(stderr, "%s", error_str (code_error));
         }
     }
     else

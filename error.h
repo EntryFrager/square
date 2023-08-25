@@ -1,10 +1,10 @@
 /// @file error.h
+
 #ifndef ERROR_H
 #define ERROR_H
 
 const int ERROR_CNT = 4;
 
-// TODO caps
 enum code_error {              ///< Error codes.
     NO_ERROR = 0,              ///< No error.
     ERR_FOPEN = 1,             ///< Error opening file.

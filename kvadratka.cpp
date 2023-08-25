@@ -9,19 +9,6 @@
 #include <windows.h>
 #include <assert.h>
 
-/// Function for displaying information about the program.
-
-void printf_help () {
-    printf("Опции:\n");
-
-    printf("\t-h\t\tотображение информации\n");
-
-    printf("\t-t\t\tтестирование программы с дефолтным файлом\n");
-
-    printf("\t-t filename.txt\tтестирование программы со своим файлом");
-
-}
-
 /**
  * Function prompting the user to solve a quadratic equation or start testing.
  * @param[out] type_mode
@@ -47,25 +34,6 @@ int test_mode () {
 #endif
 
 /**
- * Function for entering the coefficients of a quadratic equation.
- * @param[in] var_coef
- * @param[out] var_coef
-*/
-
-void input_square (Coefficients* var_coef) {
-    assert (var_coef != NULL);
-
-    printf ("Введи коэффициенты для квадратного уравнения (ax^2 + bx + c = 0): ");
-
-    while (scanf ("%lg %lg %lg", &var_coef->a, &var_coef->b, &var_coef->c) != 3)
-    {
-        clean_buffer();
-
-        printf ("Ты ввел неверное значение, давай заново (иначе будешь убит) ");
-    }
-}
-
-/**
  * Function for solving a linear equation.
  * Formula: x = -b / a
  * @param[in] a
@@ -73,11 +41,9 @@ void input_square (Coefficients* var_coef) {
  * @param[out] var_roots
 */
 
-int solve_linear (double a, double b, Roots* var_roots) {
+int solve_linear (const double a, const double b, Roots* var_roots) {
     assert (isfinite (a));
     assert (isfinite (b));
-    assert (!isnan (a));
-    assert (!isnan (b));
     assert (var_roots != NULL);
 
     if (is_zero (a))
@@ -102,13 +68,10 @@ int solve_linear (double a, double b, Roots* var_roots) {
  * @param[out] nRoots
 */
 
-int solve_dispetcher (Coefficients* var_coef, Roots* var_roots) {
+int solve_dispetcher (const Coefficients* var_coef, Roots* var_roots) {
     assert (isfinite (var_coef->a));
     assert (isfinite (var_coef->b));
     assert (isfinite (var_coef->c));
-    assert (!isnan (var_coef->a));
-    assert (!isnan (var_coef->b));
-    assert (!isnan (var_coef->c));
     assert (var_coef != NULL);
     assert (var_roots != NULL);
 
@@ -148,18 +111,15 @@ int solve_dispetcher (Coefficients* var_coef, Roots* var_roots) {
  * @param[out] nRoots
 */
 
-int solve_square (double a, double b, double c, Roots* var_roots) {
+int solve_square (const double a, const double b, const double c, Roots* var_roots) {
     assert (isfinite (a));
     assert (isfinite (b));
     assert (isfinite (c));
-    assert (!isnan (a));
-    assert (!isnan (b));
-    assert (!isnan (c));
     assert (var_roots != NULL);
 
     double disc = b * b - 4 * a * c;
 
-    if (compare_number(disc, 0))
+    if (compare_number (disc, 0))
     {
         double sqrt_disc = sqrt (disc);
 
@@ -176,84 +136,4 @@ int solve_square (double a, double b, double c, Roots* var_roots) {
     }
     else
         return NO_ROOTS;
-}
-
-/**
- * Function to check for zero.
- * @param[in] value
- * @param[out] True or False(1 or 0)
-*/
-
-bool is_zero (double value) {
-    assert (!isnan (value));
-    assert (isfinite (value));
-
-    return (fabs (value) < EPSILON);
-}
-
-/**
- * Function for comparing numbers.
- * @param[in] value_1
- * @param[in] value_2
- * @param[out] True or False(1 or 0)
-*/
-
-bool compare_number (double value_1, double value_2) {
-    assert (!isnan (value_1));
-    assert (isfinite (value_1));
-    assert (!isnan (value_2));
-    assert (isfinite (value_2));
-
-    return ((value_1 - value_2) > EPSILON);
-}
-
-/**
- * Buffer cleaning function.
- * @param[in] value_1
- * @param[in] value_2
- * @param[out] True or False(1 or 0)
-*/
-
-void clean_buffer () {
-    int ch = 0;
-
-    while ((ch = getchar () != '\n') && (ch != EOF)) {}
-}
-
-/**
- * Function for displaying roots.
- * @param[in] nROots
- * @param[in] var_roots
- * @param[out] roots
-*/
-
-void print_roots (int nRoots, const Roots* var_roots) {
-    assert (var_roots != NULL);
-
-    printf ("Сейчас решим! Это же вам не ЕГЭ!..\n");
-
-    Sleep (1000);
-
-    switch(nRoots)
-        {
-        case NO_ROOTS:
-            printf ("Уравнение не имеет решений. А вы их хотели да?..\n");
-            break;
-
-        case ONE_ROOTS:
-            printf ("Уравнение имеет одно решение: x = %lg, радуйтесь, что есть хоть это.\n", var_roots->x1);
-            break;
-
-        case TWO_ROOTS:
-            printf ("Уравнение имеет два решения: x1 = %lg, x2 = %lg. С вас %lg долларов\n",
-                    var_roots->x1, var_roots->x2, fabs (var_roots->x1 * var_roots->x2));
-            break;
-
-        case INFINITY_ROOTS:
-            printf ("Уравнение имеет бесконечно много решений.\n");
-            break;
-
-        default:
-            printf ("ERROR где-то ошибка... не скажу где.\n");
-        }
 }

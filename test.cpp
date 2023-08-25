@@ -1,4 +1,5 @@
 /// @file test.cpp
+
 #include "kvadratka.h"
 #include "test.h"
 #include "Error.h"
@@ -15,13 +16,14 @@
  * @param[in] fp
 */
 
-int data (Coefficients* var_coef, Test_data_roots* data_roots, FILE *fp) {
+int data_test (Coefficients* var_coef, Test_data_roots* data_roots, FILE *fp) {
 
     assert (var_coef != NULL);
     assert (data_roots != NULL);
     assert (fp != NULL);
 
-    if (fscanf (fp, "%lg %lg %lg %lg %lg %d", &var_coef->a, &var_coef->b, &var_coef->c, &data_roots->x1Ref, &data_roots->x2Ref, &data_roots->nRootsRef) != 6)
+    if (fscanf (fp, "%lg %lg %lg %lg %lg %d", &var_coef->a, &var_coef->b, &var_coef->c,
+        &data_roots->x1Ref, &data_roots->x2Ref, &data_roots->nRootsRef) != 6)
     {
         return ERR_FCOEF;
     }
@@ -57,7 +59,7 @@ int test (const char *filename) {
 
     for (int i = 0; i < TESTS_CNT; i++)
     {
-        if (data (&var_coef, &data_roots, fp) == ERR_FCOEF)
+        if (data_test (&var_coef, &data_roots, fp) == ERR_FCOEF)
         {
             return ERR_FCOEF;
         }
@@ -90,7 +92,7 @@ int test (const char *filename) {
  * @param[out] test_result
 */
 
-int test_solve_square (Coefficients* var_coef, Test_data_roots* data_roots, Roots* var_roots) {
+int test_solve_square (const Coefficients* var_coef, const Test_data_roots* data_roots, Roots* var_roots) {
 
     assert (var_coef != NULL);
     assert (data_roots != NULL);
@@ -98,7 +100,9 @@ int test_solve_square (Coefficients* var_coef, Test_data_roots* data_roots, Root
 
     int nRoots = solve_dispetcher (var_coef, var_roots);
 
-    if (compare_number(nRoots, data_roots->nRootsRef) || compare_number(var_roots->x1, data_roots->x1Ref) || compare_number(var_roots->x2, data_roots->x2Ref)) {
+    if (compare_number(nRoots, data_roots->nRootsRef)    ||
+        compare_number(var_roots->x1, data_roots->x1Ref) ||
+        compare_number(var_roots->x2, data_roots->x2Ref)) {
         printf ("ERROR: x1 = %lg, x2 = %lg, nRoots = %d, exected: x1Ref = %lg, x2Ref = %lg, nRootsRef = %d\n",
             var_roots->x1, var_roots->x2, nRoots, data_roots->x1Ref, data_roots->x2Ref, data_roots->nRootsRef);
 
