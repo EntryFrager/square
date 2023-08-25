@@ -3,13 +3,15 @@
 
 const double EPSILON = 1e-10;
 
+enum argc {
+    exe = 1,
+    exe_h_t = 2,
+    exe_h_t_filename = 3
+};
+
 enum mode {
     SQUARE = 1,
     TEST = 2
-};
-
-enum error {  // TODO rename
-    ZERO = 0
 };
 
 enum roots {
@@ -29,6 +31,8 @@ typedef struct {
     double x1;
     double x2;
 } Roots;
+
+void printf_help();
 
 int test_mode ();
 
