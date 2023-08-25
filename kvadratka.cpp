@@ -1,3 +1,5 @@
+/// @file kvadratka.cpp
+
 #include "kvadratka.h"
 #include "test.h"
 #include "Error.h"
@@ -6,6 +8,8 @@
 #include <TXLib.h>
 #include <windows.h>
 #include <assert.h>
+
+/// Function for displaying information about the program.
 
 void printf_help () {
     printf("Опции:\n");
@@ -18,6 +22,12 @@ void printf_help () {
 
 }
 
+/**
+ * Function prompting the user to solve a quadratic equation or start testing.
+ * @param[out] type_mode
+*/
+
+#if 0
 int test_mode () {
     printf ("Ты хочешь решить квадратное уравнение (напиши 1) или запустить тестирование (напиши 2)?\n"
             "Твой выбор: ");
@@ -34,6 +44,13 @@ int test_mode () {
 
     return type_mode;
 }
+#endif
+
+/**
+ * Function for entering the coefficients of a quadratic equation.
+ * @param[in] var_coef
+ * @param[out] var_coef
+*/
 
 void input_square (Coefficients* var_coef) {
     assert (var_coef != NULL);
@@ -47,6 +64,14 @@ void input_square (Coefficients* var_coef) {
         printf ("Ты ввел неверное значение, давай заново (иначе будешь убит) ");
     }
 }
+
+/**
+ * Function for solving a linear equation.
+ * Formula: x = -b / a
+ * @param[in] a
+ * @param[in] b
+ * @param[out] var_roots
+*/
 
 int solve_linear (double a, double b, Roots* var_roots) {
     assert (isfinite (a));
@@ -69,6 +94,13 @@ int solve_linear (double a, double b, Roots* var_roots) {
         return ONE_ROOTS;
     };
 }
+
+/**
+ * Dispatcher function to track if a quadratic equation takes a linear form.
+ * @param[in] var_coef
+ * @param[in] var_roots
+ * @param[out] nRoots
+*/
 
 int solve_dispetcher (Coefficients* var_coef, Roots* var_roots) {
     assert (isfinite (var_coef->a));
@@ -104,6 +136,18 @@ int solve_dispetcher (Coefficients* var_coef, Roots* var_roots) {
     }
 }
 
+/**
+ * Function for solving a quadratic equation.
+ * Formula: disc = b * b - 4 * a *c
+ * Formula: x1 = (- b - sqrt (disc)) / (2 * a)
+ * Formula: x2 = (- b + sqrt (disc)) / (2 * a)
+ * @param[in] a
+ * @param[in] b
+ * @param[in] c
+ * @param[in] var_roots
+ * @param[out] nRoots
+*/
+
 int solve_square (double a, double b, double c, Roots* var_roots) {
     assert (isfinite (a));
     assert (isfinite (b));
@@ -134,12 +178,25 @@ int solve_square (double a, double b, double c, Roots* var_roots) {
         return NO_ROOTS;
 }
 
+/**
+ * Function to check for zero.
+ * @param[in] value
+ * @param[out] True or False(1 or 0)
+*/
+
 bool is_zero (double value) {
     assert (!isnan (value));
     assert (isfinite (value));
 
     return (fabs (value) < EPSILON);
 }
+
+/**
+ * Function for comparing numbers.
+ * @param[in] value_1
+ * @param[in] value_2
+ * @param[out] True or False(1 or 0)
+*/
 
 bool compare_number (double value_1, double value_2) {
     assert (!isnan (value_1));
@@ -150,11 +207,25 @@ bool compare_number (double value_1, double value_2) {
     return ((value_1 - value_2) > EPSILON);
 }
 
+/**
+ * Buffer cleaning function.
+ * @param[in] value_1
+ * @param[in] value_2
+ * @param[out] True or False(1 or 0)
+*/
+
 void clean_buffer () {
     int ch = 0;
 
     while ((ch = getchar () != '\n') && (ch != EOF)) {}
 }
+
+/**
+ * Function for displaying roots.
+ * @param[in] nROots
+ * @param[in] var_roots
+ * @param[out] roots
+*/
 
 void print_roots (int nRoots, const Roots* var_roots) {
     assert (var_roots != NULL);

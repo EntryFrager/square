@@ -1,3 +1,4 @@
+/// @file test.cpp
 #include "kvadratka.h"
 #include "test.h"
 #include "Error.h"
@@ -7,20 +8,35 @@
 #include <windows.h>
 #include <assert.h>
 
+/**
+ * Function for reading test data.
+ * @param[in] var_coef
+ * @param[in] data_roots
+ * @param[in] fp
+*/
 
-void data (Coefficients* var_coef, Test_data_roots* data_roots, FILE *fp) {
+int data (Coefficients* var_coef, Test_data_roots* data_roots, FILE *fp) {
 
     assert (var_coef != NULL);
     assert (data_roots != NULL);
     assert (fp != NULL);
 
-    while (fscanf (fp, "%lg %lg %lg, %lg, %lg, %d", &var_coef->a, &var_coef->b, &var_coef->c, &data_roots->x1Ref, &data_roots->x2Ref, &data_roots->nRootsRef) != 6)
+    if (fscanf (fp, "%lg %lg %lg %lg %lg %d", &var_coef->a, &var_coef->b, &var_coef->c, &data_roots->x1Ref, &data_roots->x2Ref, &data_roots->nRootsRef) != 6)
     {
-        clean_buffer ();
-        printf ("В файле допущена ошибка при считываниии коэффициентов и правильных корней");
+        return ERR_FCOEF;
     }
-    printf("%lg", var_coef->a);
+    else
+    {
+        return NO_ERROR;
+    }
+    return 0;
 }
+
+/**
+ * Main test management function.
+ * @param[in] filename
+ * @param[out] code_error
+*/
 
 int test (const char *filename) {
 
@@ -34,18 +50,21 @@ int test (const char *filename) {
 
     if (fp == NULL)
     {
-        printf("fopen");
-        return error_fopen;
+        return ERR_FOPEN;
     }
 
     int test_success = 0;
 
     for (int i = 0; i < TESTS_CNT; i++)
     {
-        printf("1");
-        data (&var_coef, &data_roots, fp);
-        printf("2");
-        test_success += test_solve_square (&var_coef, &data_roots, &var_roots);
+        if (data (&var_coef, &data_roots, fp) == ERR_FCOEF)
+        {
+            return ERR_FCOEF;
+        }
+        else
+        {
+            test_success += test_solve_square (&var_coef, &data_roots, &var_roots);
+        }
     }
 
     if (test_success == TESTS_CNT) {
@@ -57,12 +76,19 @@ int test (const char *filename) {
 
     if (fclose (fp) != 0)
     {
-        printf("fclose");
-        return error_fclose;
+        return ERR_FCLOSE;
     }
 
     return 0;
 }
+
+/**
+ * Function testing our program.
+ * @param[in] var_coef
+ * @param[in] data_roots
+ * @param[in] var_roots
+ * @param[out] test_result
+*/
 
 int test_solve_square (Coefficients* var_coef, Test_data_roots* data_roots, Roots* var_roots) {
 

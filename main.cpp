@@ -1,3 +1,5 @@
+/// @file main.c
+
 #include "kvadratka.h"
 #include "test.h"
 #include "Error.h"
@@ -8,7 +10,12 @@
 #include <assert.h>
 #include <string.h>
 
-const char default_tests_src[] = "Test.txt";
+const char default_tests_src[] = "Test.txt";            ///<Default test file for testing the program.
+
+/** Main entry point of the program.
+ *  @param[in] argc
+ *  @param[in] argv
+*/
 
 int main (int argc, char *argv[]) {
     Roots var_roots = {};
@@ -16,43 +23,66 @@ int main (int argc, char *argv[]) {
 
     printf ("Это программа решающая квадратные уравнения (ax^2 + bx + c = 0).\n");
 
-    char *str = argv[1];
+    char *test_filename = NULL;
 
-    switch(argc)
+    int test_mode = 0;
+
+    for (int i = 1; i < argc; i++)
+    {
+        if (argv[i][0] == '-')
         {
-        case exe:
+            if (strlen(argv[i]) != 2)
+            {
+                printf("ERROR: ты ввел неправильныый формат параметра...\n");
+                return 0;
+            }
+            switch (*(argv[i] + 1))
+            {
+                case 't':
+                {
+                    test_mode = 1;
+                }
+                break;
+                case 'h':
+                {
+                    printf_help ();
+                    return 0;
+                }
+                break;
+                default:
+                    printf("ERROR: ты ввел неверный параметр...\n");
+                    return 0;
+            }
+        }
+        else
         {
-            //if (type_mode == SQUARE)
-            int type_mode = test_mode ();
-            input_square (&var_coef);
-
-            int nRoots = solve_dispetcher (&var_coef, &var_roots);
-
-            print_roots (nRoots, &var_roots);
+            test_filename = argv[i];
         }
-            break;
-        case exe_h_t:
-            if (strstr("-h", str) != NULL)
-            {
-                printf_help ();
-            }
-            else if (strstr("-t", str) != NULL)
-            {
-                printf ("Будет использоваться дефолтный файл для тестов");
+    }
 
-                int code_error = test (default_tests_src);
-            }
-            break;
-        case exe_h_t_filename:
-            if (strstr("-t", str) != NULL)
-            {
-                char *tests_src_filename = argv[2];
-                int code_error = test (tests_src_filename);
-            }
-            break;
-        default:
-            printf("ERROR: ты ввел неверный код...");
+    if (test_mode)
+    {
+        if (test_filename == NULL)
+        {
+            printf ("Будет использоваться дефолтный файл для тестов\n");
+            test_filename = (char *) default_tests_src;
         }
+
+        int code_error = test (test_filename);
+
+        if (code_error != 0)
+        {
+            printf("%s", error_str (code_error));
+        }
+    }
+    else
+    {
+        input_square (&var_coef);
+
+        int nRoots = solve_dispetcher (&var_coef, &var_roots);
+
+        print_roots (nRoots, &var_roots);
+    }
 
     return 0;
 }

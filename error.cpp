@@ -1,3 +1,4 @@
+/// @file error.cpp
 #include "kvadratka.h"
 #include "test.h"
 #include "Error.h"
@@ -7,13 +8,24 @@
 #include <windows.h>
 #include <assert.h>
 
-void error (int code_error) {
-    if (code_error == error_fopen)
+/**
+ * Error return function.
+ * @param[in] code_error
+*/
+static const char* err_msgs_arr[] = {
+    "Ошибок нет\n",
+    "ERROR: произошла ошибка при открытии файла\n",
+    "ERROR: произошла ошибка при закрытии файла\n",
+    "ERROR: произошла ошибка при считывании коэффициентов и правильных корней из тестового файла."
+};
+
+const char* error_str (unsigned code_error) {
+    if (code_error < ERROR_CNT)
     {
-        printf("ERROR: произошла ошибка при открытии файла в test.cpp --> int test(...)");
+        return err_msgs_arr[code_error];
     }
-    if (code_error == error_fclose)
+    else
     {
-        printf("ERROR: произошла ошибка при закрытии файла в test.cpp --> int test(...)");
+        return "Неизвестная ошибка\n";
     }
 }
