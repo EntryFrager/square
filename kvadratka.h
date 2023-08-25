@@ -5,12 +5,6 @@
 
 const double EPSILON = 1e-10;               ///< Constant needed to compare numbers of type double.
 
-enum argc {                                 ///< Arguments specifying the program's behavior.
-    EXE = 1,
-    EXE_H_T = 2,
-    EXE_H_T_FILENAME = 3
-};
-
 enum mode {                                 ///< Arguments specifying the program's behavior.
     SQUARE = 1,                             ///< Argument for quadratic equation.
     TEST = 2                                ///< Test argument.

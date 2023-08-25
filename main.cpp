@@ -1,4 +1,4 @@
-/// @file main.c
+/// @file main.cpp
 
 #include "kvadratka.h"
 #include "test.h"
@@ -10,7 +10,7 @@
 #include <assert.h>
 #include <string.h>
 
-const char default_tests_src[] = "Test.txt";            ///<Default test file for testing the program.
+const char default_tests_src[] = "Test.txt";            ///< Default test file for testing the program.
 
 /** Main entry point of the program.
  *  @param[in] argc

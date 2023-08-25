@@ -9,15 +9,20 @@
 #include <assert.h>
 
 /**
- * Error return function.
- * @param[in] code_error
+ * types of errors
 */
+
 static const char* err_msgs_arr[] = {
     "Ошибок нет\n",
     "ERROR: произошла ошибка при открытии файла\n",
     "ERROR: произошла ошибка при закрытии файла\n",
     "ERROR: произошла ошибка при считывании коэффициентов и правильных корней из тестового файла."
 };
+
+/**
+ * Error return function.
+ * @param[in] code_error
+*/
 
 const char* error_str (unsigned code_error) {
     if (code_error < ERROR_CNT)
