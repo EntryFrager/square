@@ -4,6 +4,7 @@
 #include <math.h>
 #include <TXLib.h>
 #include <windows.h>
+#icnlude <stdlib.h>
 #include <assert.h>
 #include "kvadratka.h"
 #include "test.h"
@@ -44,20 +45,11 @@ int test_mode () {
 
 int solve_linear (const double a, const double b, Roots* var_roots)
 {
-    if (my_assert (isfinite (a)))
-    {
-        return ERR_ISFINITE;
-    }
+    my_assert (isfinite (a));
 
-    if (my_assert (isfinite (b)))
-    {
-        return ERR_ISFINITE;
-    }
+    my_assert (isfinite (b));
 
-    if (my_assert (var_roots != NULL))
-    {
-        return ERR_NULL;
-    }
+    my_assert (var_roots != NULL))
 
     if (is_zero (a))
     {
@@ -87,30 +79,15 @@ int solve_linear (const double a, const double b, Roots* var_roots)
 
 int solve_dispetcher (const Coefficients* var_coef, Roots* var_roots)
 {
-    if (my_assert (isfinite (var_coef->a)))
-    {
-        return ERR_ISFINITE;
-    }
+    my_assert (isfinite (var_coef->a));
 
-    if (my_assert (isfinite (var_coef->b)))
-    {
-        return ERR_ISFINITE;
-    }
+    my_assert (isfinite (var_coef->b));
 
-    if (my_assert (isfinite (var_coef->c)))
-    {
-        return ERR_ISFINITE;
-    }
+    my_assert (isfinite (var_coef->c));
 
-    if (my_assert (var_coef != NULL))
-    {
-        return ERR_NULL;
-    }
+    my_assert (var_coef != NULL);
 
-    if (my_assert (var_roots != NULL))
-    {
-        return ERR_NULL;
-    }
+    my_assert (var_roots != NULL);
 
     if (is_zero (var_coef->a))
     {
@@ -138,25 +115,13 @@ int solve_dispetcher (const Coefficients* var_coef, Roots* var_roots)
 
 int solve_square (const double a, const double b, const double c, Roots* var_roots)
 {
-    if (my_assert (isfinite (a)))
-    {
-        return ERR_ISFINITE;
-    }
+    my_assert (isfinite (a));
 
-    if (my_assert (isfinite (b)))
-    {
-        return ERR_ISFINITE;
-    }
+    my_assert (isfinite (b));
 
-    if (my_assert (isfinite (c)))
-    {
-        return ERR_ISFINITE;
-    }
+    my_assert (isfinite (c));
 
-    if (my_assert (var_roots != NULL))
-    {
-        return ERR_NULL;
-    }
+    my_assert (var_roots != NULL);
 
     if (is_zero (c))
     {

@@ -4,6 +4,7 @@
 #include <math.h>
 #include <TXLib.h>
 #include <windows.h>
+#icnlude <stdlib.h>
 #include <assert.h>
 #include "kvadratka.h"
 #include "test.h"
@@ -17,10 +18,7 @@
 
 bool is_zero (const double value)
 {
-    if (my_assert (isfinite(value)))
-    {
-        return ERR_ISFINITE;
-    }
+    my_assert (isfinite(value));
 
     return (fabs (value) < EPSILON);
 }
@@ -34,14 +32,9 @@ bool is_zero (const double value)
 
 bool compare_number (const double value_1, const double value_2)
 {
-    if (my_assert (isfinite(value_1)))
-    {
-        return ERR_ISFINITE;
-    }
-    if (my_assert (isfinite(value_2)))
-    {
-        return ERR_ISFINITE;
-    }
+    my_assert (isfinite(value_1));
+
+    my_assert (isfinite(value_2));
 
     return ((value_1 - value_2) > EPSILON);
 }

@@ -4,7 +4,6 @@
 #define TEST_H
 #include "kvadratka.h"
 #include "error.h"
-#include <stdio.h>
 
 const int TESTS_CNT = 5;                        ///< Constant containing the number of tests
 

@@ -3,7 +3,7 @@
 #ifndef ERROR_H
 #define ERROR_H
 
-#define my_assert (value) (value)? 0: 1
+#define my_assert (value) (value)? 0: exit()
 
 const int ERROR_CNT = 6;
 

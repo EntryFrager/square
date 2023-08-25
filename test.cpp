@@ -4,6 +4,7 @@
 #include <math.h>
 #include <TXLib.h>
 #include <windows.h>
+#icnlude <stdlib.h>
 #include <assert.h>
 #include "kvadratka.h"
 #include "test.h"
@@ -18,20 +19,11 @@
 
 int data_test (Coefficients* var_coef, Test_data_roots* data_roots, FILE *fp)
 {
-    if (my_assert (var_coef != NULL))
-    {
-        return ERR_NULL;
-    }
+    my_assert (var_coef != NULL);
 
-    if (my_assert (data_roots != NULL))
-    {
-        return ERR_NULL;
-    }
+    my_assert (data_roots != NULL);
 
-    if (my_assert (fp != NULL))
-    {
-        return ERR_NULL;
-    }
+    my_assert (fp != NULL);
 
     if (fscanf (fp, "COEFF %lg %lg %lg %lg %lg %d", &var_coef->a, &var_coef->b, &var_coef->c,
         &data_roots->x1Ref, &data_roots->x2Ref, &data_roots->nRootsRef) != 6)
@@ -53,10 +45,7 @@ int data_test (Coefficients* var_coef, Test_data_roots* data_roots, FILE *fp)
 
 int test (const char *filename)
 {
-    if (my_assert (filename != NULL))
-    {
-        return ERR_NULL;
-    }
+    my_assert (filename != NULL);
 
     Test_data_roots data_roots = {};
     Roots var_roots = {};
@@ -110,20 +99,11 @@ int test (const char *filename)
 
 int test_solve_square (const Coefficients* var_coef, const Test_data_roots* data_roots, Roots* var_roots)
 {
-    if (my_assert (var_coef != NULL))
-    {
-        return ERR_NULL;
-    }
+    my_assert (var_coef != NULL);
 
-    if (my_assert (data_roots != NULL))
-    {
-        return ERR_NULL;
-    }
+    my_assert (data_roots != NULL);
 
-    if (my_assert (var_roots != NULL))
-    {
-        return ERR_NULL;
-    }
+    my_assert (var_roots != NULL);
 
     int nRoots = solve_dispetcher (var_coef, var_roots);
 

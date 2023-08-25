@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <TXLib.h>
+#icnlude <stdlib.h>
 #include <windows.h>
 #include <assert.h>
 #include "kvadratka.h"
@@ -88,10 +89,6 @@ int main (int argc, const char *argv[])
         input_square (&var_coef);
 
         int nRoots = solve_dispetcher (&var_coef, &var_roots);
-        if (nRoots == ERR_ASSERT)
-        {
-            fprintf(stderr, "%s", error_str (ERR_ASSERT));
-        }
 
         print_roots (nRoots, &var_roots);
     }

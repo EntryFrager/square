@@ -4,6 +4,7 @@
 #include <math.h>
 #include <TXLib.h>
 #include <windows.h>
+#icnlude <stdlib.h>
 #include <assert.h>
 #include "kvadratka.h"
 #include "test.h"

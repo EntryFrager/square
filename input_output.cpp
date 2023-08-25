@@ -4,6 +4,7 @@
 #include <math.h>
 #include <TXLib.h>
 #include <windows.h>
+#icnlude <stdlib.h>
 #include <assert.h>
 #include "kvadratka.h"
 #include "test.h"
@@ -29,10 +30,7 @@ void printf_help ()
 
 void input_square (Coefficients* var_coef)
 {
-    if (my_assert (var_coef != NULL))
-    {
-        return ERR_NULL;
-    }
+    my_assert (var_coef != NULL);
 
     printf ("Введи коэффициенты для квадратного уравнения (ax^2 + bx + c = 0): ");
 
@@ -53,10 +51,7 @@ void input_square (Coefficients* var_coef)
 
 void print_roots (const int nRoots, const Roots* var_roots)
 {
-    if (my_assert (var_roots != NULL))
-    {
-        return ERR_NULL;
-    }
+    my_assert (var_roots != NULL);
 
     printf ("Сейчас решим! Это же вам не ЕГЭ!..\n");
 
