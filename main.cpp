@@ -22,7 +22,7 @@ int main (int argc, const char *argv[])
     Roots var_roots = {};
     Coefficients var_coef = {};
 
-    printf ("Это программа решающая квадратные уравнения (ax^2 + bx + c = 0).\n");
+    puts_function ("Это программа решающая квадратные уравнения (ax^2 + bx + c = 0).\n");
 
     const char *test_filename = NULL;
 
@@ -73,7 +73,8 @@ int main (int argc, const char *argv[])
     {
         if (test_filename == NULL)
         {
-            printf ("Будет использоваться дефолтный файл для тестов\n");
+            puts_function ("Будет использоваться дефолтный файл для тестов\n");
+
             test_filename = (char *) default_tests_src;
         }
 

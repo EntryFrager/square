@@ -7,9 +7,9 @@ CFLAGS = -c -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-
 	-Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing   \
 	-Wstrict-null-sentinel -Wtype-limits -Wwrite-strings -Werror=vla -D_DEBUG -D_EJUDGE_CLIENT_SIDE
 
-INCLUDES = kvadratka.h test.h error.h
+INCLUDES = kvadratka.h test.h error.h str_function.h
 
-SOURCES = main.cpp kvadratka.cpp input_output.cpp utilities.cpp test.cpp error.cpp
+SOURCES = main.cpp kvadratka.cpp input_output.cpp utilities.cpp test.cpp error.cpp str_function.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
 

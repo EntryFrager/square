@@ -14,12 +14,11 @@
 
 void printf_help ()
 {
-    printf("Опции:\n");
+    puts_function ("Опции:\n");
 
-    printf ("\t" "-h"              "\t\t" "отображение информации\n");
-    printf ("\t" "-t"              "\t\t" "тестирование программы с дефолтным файлом\n");
-    printf ("\t" "-t filename.txt" "\t"   "тестирование программы со своим файлом");
-
+    puts_function ("\t" "-h"              "\t\t" "отображение информации\n");
+    puts_function ("\t" "-t"              "\t\t" "тестирование программы с дефолтным файлом\n");
+    puts_function ("\t" "-t filename.txt" "\t"   "тестирование программы со своим файлом\n");
 }
 
 /**
@@ -32,13 +31,13 @@ void input_square (Coefficients* var_coef)
 {
     my_assert (var_coef != NULL);
 
-    printf ("Введи коэффициенты для квадратного уравнения (ax^2 + bx + c = 0): ");
+    puts_function ("Введи коэффициенты для квадратного уравнения (ax^2 + bx + c = 0): ");
 
     while (scanf ("%lg %lg %lg", &var_coef->a, &var_coef->b, &var_coef->c) != 3)
     {
         clean_buffer();
 
-        printf ("Ты ввел неверное значение, давай заново (иначе будешь убит) ");
+        puts_function ("Ты ввел неверное значение, давай заново (иначе будешь убит) ");
     }
 }
 
@@ -53,6 +52,7 @@ void print_roots (const int nRoots, const Roots* var_roots)
 {
     my_assert (var_roots != NULL);
 
+    puts_function ("Ты ввел неверное значение, давай заново (иначе будешь убит) ");
     printf ("Сейчас решим! Это же вам не ЕГЭ!..\n");
 
     Sleep (1000);
@@ -60,7 +60,7 @@ void print_roots (const int nRoots, const Roots* var_roots)
     switch(nRoots)
         {
         case NO_ROOTS:
-            printf ("Уравнение не имеет решений. А вы их хотели да?..\n");
+            puts_function ("Уравнение не имеет решений. А вы их хотели да?..\n");
             break;
 
         case ONE_ROOTS:
@@ -73,7 +73,7 @@ void print_roots (const int nRoots, const Roots* var_roots)
             break;
 
         case INFINITY_ROOTS:
-            printf ("Уравнение имеет бесконечно много решений.\n");
+            puts_function ("Уравнение имеет бесконечно много решений.\n");
             break;
 
         default:
