@@ -3,6 +3,10 @@
 #ifndef KVADRATKA_H
 #define KVADRATKA_H
 
+#include "kvadratka.h"
+#include "error.h"
+#include "str_function.h"
+
 const double EPSILON = 1e-10;               ///< Constant needed to compare numbers of type double.
 
 enum mode {                                 ///< Arguments specifying the program's behavior.

@@ -4,7 +4,7 @@
 #include <math.h>
 #include <TXLib.h>
 #include <windows.h>
-#icnlude <stdlib.h>
+#include <stdlib.h>
 #include <assert.h>
 #include "kvadratka.h"
 #include "test.h"
@@ -49,7 +49,7 @@ int solve_linear (const double a, const double b, Roots* var_roots)
 
     my_assert (isfinite (b));
 
-    my_assert (var_roots != NULL))
+    my_assert (var_roots != NULL);
 
     if (is_zero (a))
     {
@@ -129,7 +129,7 @@ int solve_square (const double a, const double b, const double c, Roots* var_roo
 
         var_roots->x2 = -b / a;
 
-        return TWO_ROOTS
+        return TWO_ROOTS;
     }
 
     double disc = b * b - 4 * a * c;

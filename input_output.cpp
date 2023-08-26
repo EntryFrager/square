@@ -4,7 +4,7 @@
 #include <math.h>
 #include <TXLib.h>
 #include <windows.h>
-#icnlude <stdlib.h>
+#include <stdlib.h>
 #include <assert.h>
 #include "kvadratka.h"
 #include "test.h"
@@ -77,6 +77,6 @@ void print_roots (const int nRoots, const Roots* var_roots)
             break;
 
         default:
-            printf ("ERROR где-то ошибка... не скажу где.\n");
+            fprintf (stderr, "ERROR где-то ошибка... не скажу где.\n");
         }
 }

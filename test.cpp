@@ -4,7 +4,7 @@
 #include <math.h>
 #include <TXLib.h>
 #include <windows.h>
-#icnlude <stdlib.h>
+#include <stdlib.h>
 #include <assert.h>
 #include "kvadratka.h"
 #include "test.h"
@@ -17,7 +17,7 @@
  * @param[in] fp
 */
 
-int data_test (Coefficients* var_coef, Test_data_roots* data_roots, FILE *fp)
+int read_data_test (Coefficients* var_coef, Test_data_roots* data_roots, FILE *fp)
 {
     my_assert (var_coef != NULL);
 
@@ -25,15 +25,12 @@ int data_test (Coefficients* var_coef, Test_data_roots* data_roots, FILE *fp)
 
     my_assert (fp != NULL);
 
-    if (fscanf (fp, "COEFF %lg %lg %lg %lg %lg %d", &var_coef->a, &var_coef->b, &var_coef->c,
-        &data_roots->x1Ref, &data_roots->x2Ref, &data_roots->nRootsRef) != 6)
+    if (fscanf (fp, "COEFF %lg %lg %lg ROOTS %lg %lg NUM %d\n", &var_coef->a, &var_coef->b, &var_coef->c,
+                &data_roots->x1Ref, &data_roots->x2Ref, &data_roots->nRootsRef) != 6)
     {
         return ERR_FCOEF;
     }
-    else
-    {
-        return NO_ERROR;
-    }
+
     return 0;
 }
 
@@ -62,7 +59,7 @@ int test (const char *filename)
 
     for (int i = 0; i < TESTS_CNT; i++)
     {
-        if (data_test (&var_coef, &data_roots, fp) == ERR_FCOEF)
+        if (read_data_test (&var_coef, &data_roots, fp) == ERR_FCOEF)
         {
             return ERR_FCOEF;
         }

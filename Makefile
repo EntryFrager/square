@@ -7,6 +7,8 @@ CFLAGS = -c -Wshadow -Winit-self -Wredundant-decls -Wcast-align -Wundef -Wfloat-
 	-Wnon-virtual-dtor -Woverloaded-virtual -Wpointer-arith -Wsign-promo -Wstack-usage=8192 -Wstrict-aliasing   \
 	-Wstrict-null-sentinel -Wtype-limits -Wwrite-strings -Werror=vla -D_DEBUG -D_EJUDGE_CLIENT_SIDE
 
+INCLUDES = kvadratka.h test.h error.h
+
 SOURCES = main.cpp kvadratka.cpp input_output.cpp utilities.cpp test.cpp error.cpp
 
 OBJECTS = $(SOURCES:.cpp=.o)
@@ -18,5 +20,5 @@ all: $(SOURCES) $(EXECUTABLE)
 $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@
 
-.cpp.o:
+.cpp.o: $(INCLUDES)
 	$(CC) $(CFLAGS) $< -o $@

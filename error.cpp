@@ -4,7 +4,7 @@
 #include <math.h>
 #include <TXLib.h>
 #include <windows.h>
-#icnlude <stdlib.h>
+#include <stdlib.h>
 #include <assert.h>
 #include "kvadratka.h"
 #include "test.h"
@@ -19,8 +19,6 @@ static const char* err_msgs_arr[] = {
     "ERROR: произошла ошибка при открытии файла.\n",
     "ERROR: произошла ошибка при закрытии файла.\n",
     "ERROR: произошла ошибка при считывании коэффициентов и правильных корней из тестового файла.\n",
-    "ERROR: произошла ошибка, так как один из коэффициентов == NAN или бесконечность.\n",
-    "ERROR: произошла ошибка, так как получен нулевой указатель"
 };
 
 /**

@@ -2,8 +2,6 @@
 
 #ifndef TEST_H
 #define TEST_H
-#include "kvadratka.h"
-#include "error.h"
 
 const int TESTS_CNT = 5;                        ///< Constant containing the number of tests
 
@@ -13,7 +11,7 @@ typedef struct {                                ///< Structure containing regula
     int nRootsRef;                              ///< Number of roots.
 } Test_data_roots;
 
-int data_test (Coefficients* var_coef, Test_data_roots* data_roots, FILE *fp);                              ///< Function for reading test data.
+int read_data_test (Coefficients* var_coef, Test_data_roots* data_roots, FILE *fp);                              ///< Function for reading test data.
 
 int test (const char *filename);                                                                            ///< Main test management function.
 

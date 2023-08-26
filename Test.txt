@@ -1,5 +1,5 @@
-COEFF 1   2   1  ROOTS -1  -1 NUM 1
-0   0   0   0   0   1000
-0   0   1   0   0   0
-1   4   4   -2  -2  1
-1   -5  -14 -2  6   2
+COEFF 1   2   1 ROOTS -1  -1 NUM 1
+COEFF 0   0   0 ROOTS 0   0  NUM 1000
+COEFF 0   0   1 ROOTS 0   0  NUM 0
+COEFF 1   4   4 ROOTS -2  -2 NUM 1
+COEFF 1   -5  -14 ROOTS -2  6  NUM 2

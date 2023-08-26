@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <TXLib.h>
-#icnlude <stdlib.h>
+#include <stdlib.h>
 #include <windows.h>
 #include <assert.h>
 #include "kvadratka.h"
@@ -24,7 +24,7 @@ int main (int argc, const char *argv[])
 
     printf ("Ёто программа решающа€ квадратные уравнени€ (ax^2 + bx + c = 0).\n");
 
-    char *test_filename = NULL;
+    const char *test_filename = NULL;
 
     int test_mode = 0;
 
