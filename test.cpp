@@ -71,11 +71,11 @@ int test (const char *filename)
 
     if (test_success == TESTS_CNT)
     {
-        puts_function ("Тестирование прошло успешно\n");
+        my_puts ("Тестирование прошло успешно\n");
     }
     else
     {
-        puts_function ("Где-то допущена ошибка\n");
+        my_puts ("Где-то допущена ошибка\n");
     }
 
     if (fclose (fp) != 0)
@@ -115,7 +115,7 @@ int test_solve_square (const Coefficients* var_coef, const Test_data_roots* data
     }
     else
     {
-        puts_function("Test-OK\n");
+        my_puts ("Test-OK\n");
 
         return 1;
     }

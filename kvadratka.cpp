@@ -91,7 +91,7 @@ int solve_dispetcher (const Coefficients* var_coef, Roots* var_roots)
 
     if (is_zero (var_coef->a))
     {
-        puts_function ("Твоё уравнение имеет линейный вид.\n");
+        my_puts ("Твоё уравнение имеет линейный вид.\n");
 
         return solve_linear (var_coef->b, var_coef->c, var_roots);
     }
