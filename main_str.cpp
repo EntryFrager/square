@@ -71,7 +71,10 @@ int main ()
         fprintf(stderr, "ERROR функция my_strchr допустила ошибку\n");
     }
 
-    if (strstr(dest, src) == my_strstr(dest, src))
+    char str_str[] = "lilililas lililos";
+    char src_123[] = "lilila";
+
+    if (strstr(str_str, src_123)  == my_strstr(str_str, src_123))
     {
         puts ("Функция strstr работает верно");
     }

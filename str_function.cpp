@@ -146,19 +146,23 @@ char* my_strstr (const char* s1, const char* s2)
 
     size_t t = 0;
 
-    for (size_t i = 0; i <= s1_len; i++)
+    for (size_t i = 0; i < s1_len; i++)
     {
-        if (t == s2_len)
+        for (size_t j = 0; j < s2_len; j++)
         {
-            return (char *) s1 + i - s2_len;
-        }
-        if (s1[i] == s2[t])
-        {
-            t++;
-        }
-        else
-        {
-            t = 0;
+            if (t == s2_len)
+            {
+                return (char *) s1  + i - 1;
+            }
+            if (s1[i + j] == s2[j])
+            {
+                t++;
+            }
+            else
+            {
+                t = 0;
+                break;
+            }
         }
     }
     return NULL;
