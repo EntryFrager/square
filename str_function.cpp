@@ -59,15 +59,14 @@ char* my_strcpy (char* dest, const char* src)
     my_assert (dest != NULL);
     my_assert (src  != NULL);
 
-    int i = 0;
+    char* dest_new = dest;
 
     while (src[0] != '\0')
     {
-        dest[i] = src[i];
-        i++;
+        *dest_new++ = *src++;
     }
 
-    dest[i] = '\0';
+    *dest_new = '\0';
 
     return dest;
 }
@@ -100,15 +99,14 @@ char* my_strcat (char* dest, const char* src)
     my_assert (src != NULL);
 
     size_t dest_len = my_strlen (dest);
-    int i = 0;
+    char* dest_new = dest + dest_len;
 
-    while (src[i] != '\0')
+    while (*src != '\0')
     {
-        dest[dest_len + i] = src[i];
-        i++;
+        *(dest_new++) = *(src++);
     }
 
-    dest[dest_len  + i] = '\0';
+    *dest_new = '\0';
 
     return dest;
 }
