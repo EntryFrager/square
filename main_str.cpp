@@ -73,6 +73,7 @@ int main ()
     my_strstr (s3, s4);
     test_msg (strcmp (s1, s3) == 0, "my_strstr");
 
-    //char str1[40] = "abcdef", str2[40] = "abcdef";
-    //test_msg (strcmp (str1, str2) == my_strcmp (str1, str2), "my_strcmp");
+    char str1[40] = "abcdef", str2[40] = "abcdef";
+    char str3[40] = "abcdef", str4[40] = "abcdef";
+    test_msg (strcmp (str1, str2) == my_strcmp (str3, str4), "my_strcmp");
 }

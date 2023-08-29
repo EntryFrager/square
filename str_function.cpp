@@ -187,33 +187,14 @@ char* my_strstr (const char* s1, const char* s2)
 
 int my_strcmp (const char* s1, const char* s2)
 {
-    size_t s1_len = my_strlen (s1);
+    size_t s1_len = my_strlen (s1), s2_len = my_strlen (s2);
 
-    int t = 0;
-
-    for (size_t i = 0; i < s1_len; i++)
-    {
-        if (s1[i] > s2[i])
-        {
-            return 1;
-        }
-        else if (s1[i] < s2[i])
-        {
-            return -1;
-        }
-        else
-        {
-            t++;
-        }
-    }
-    return 0;
-
-    /*while ((*s1++ == *s2++) && (*s1 != '\0'))
+    while ((*s1++ == *s2++) && (*s1 != '\0'))
     {
         s1_len--;
         s2_len--;
     }
-    if ((s1_len == 0) && (s2_len == 0))
+    if (s1_len == s2_len)
     {
         return 0;
     }
@@ -224,7 +205,7 @@ int my_strcmp (const char* s1, const char* s2)
     else
     {
         return -1;
-    }*/
+    }
 }
 
 #if 0
