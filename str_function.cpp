@@ -120,10 +120,6 @@ char* my_strncat (char* dest, const char* src, size_t n)
 
     for (size_t i = 0; i < n; i++)
     {
-        /*if (src[i - 1] == '\0')
-        {
-            break;
-        }*/
         dest[dest_len + i] = src[i];
     }
 
@@ -132,9 +128,11 @@ char* my_strncat (char* dest, const char* src, size_t n)
 
 char* my_strdup (const char* s)
 {
+    my_assert (s != NULL);
+
     size_t s_len = my_strlen (s);
 
-    char* s_copy = (char *) malloc (sizeof(s));  // TODO  NULL
+    char* s_copy = (char *) malloc (sizeof(char) * s_len);
 
     strncpy (s_copy, s, s_len);
 
@@ -143,7 +141,9 @@ char* my_strdup (const char* s)
 
 char* my_strchr (const char* s, int c)
 {
-    size_t s_len = my_strlen (s); // TODO
+    my_assert (s != NULL);
+
+    size_t s_len = my_strlen (s);
 
     for (size_t i = 0; i <= s_len; i++)
     {
