@@ -14,11 +14,12 @@
 
 void printf_help ()
 {
-    my_puts ("Опции:\n");
+    printf ("Опции:\n");
 
-    my_puts ("\t" "-h"              "\t\t" "отображение информации\n");
-    my_puts ("\t" "-t"              "\t\t" "тестирование программы с дефолтным файлом\n");
-    my_puts ("\t" "-t filename.txt" "\t"   "тестирование программы со своим файлом\n");
+    printf ("\t" "-h"              "\t\t" "отображение информации\n");
+    printf ("\t" "-t"              "\t\t" "тестирование программы с дефолтным файлом\n");
+    printf ("\t" "-t filename.txt" "\t"   "тестирование программы со своим файлом\n");
+    printf ("Дополнительные сведения о программе смотри в документации.\n");
 }
 
 /**
@@ -31,13 +32,13 @@ void input_square (Coefficients* var_coef)
 {
     my_assert (var_coef != NULL);
 
-    my_puts ("Введи коэффициенты для квадратного уравнения (ax^2 + bx + c = 0): ");
+    printf ("Введи коэффициенты для квадратного уравнения (ax^2 + bx + c = 0): ");
 
     while (scanf ("%lg %lg %lg", &var_coef->a, &var_coef->b, &var_coef->c) != 3)
     {
         clean_buffer();
 
-        my_puts ("Ты ввел неверное значение, давай заново (иначе будешь убит) ");
+        printf ("Ты ввел неверное значение, давай заново (иначе будешь убит) ");
     }
 }
 
@@ -52,7 +53,6 @@ void print_roots (const int nRoots, const Roots* var_roots)
 {
     my_assert (var_roots != NULL);
 
-    my_puts ("Ты ввел неверное значение, давай заново (иначе будешь убит) ");
     printf ("Сейчас решим! Это же вам не ЕГЭ!..\n");
 
     Sleep (1000);
@@ -60,7 +60,7 @@ void print_roots (const int nRoots, const Roots* var_roots)
     switch(nRoots)
         {
         case NO_ROOTS:
-            my_puts ("Уравнение не имеет решений. А вы их хотели да?..\n");
+            printf ("Уравнение не имеет решений. А вы их хотели да?..\n");
             break;
 
         case ONE_ROOTS:
@@ -73,7 +73,7 @@ void print_roots (const int nRoots, const Roots* var_roots)
             break;
 
         case INFINITY_ROOTS:
-            my_puts ("Уравнение имеет бесконечно много решений.\n");
+            printf ("Уравнение имеет бесконечно много решений.\n");
             break;
 
         default:

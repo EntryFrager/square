@@ -44,6 +44,8 @@ int test (const char *filename)
 {
     my_assert (filename != NULL);
 
+    int err_code = 0;
+
     Test_data_roots data_roots = {};
     Roots var_roots = {};
     Coefficients var_coef = {};
@@ -61,7 +63,8 @@ int test (const char *filename)
     {
         if (read_data_test (&var_coef, &data_roots, fp) == ERR_FCOEF)
         {
-            return ERR_FCOEF;
+            err_code = ERR_FCOEF;
+            goto part_err_fcoef;
         }
         else
         {
@@ -71,16 +74,23 @@ int test (const char *filename)
 
     if (test_success == TESTS_CNT)
     {
-        my_puts ("Тестирование прошло успешно\n");
+        printf ("Тестирование прошло успешно\n");
     }
     else
     {
-        my_puts ("Где-то допущена ошибка\n");
+        printf ("Где-то допущена ошибка\n");
     }
 
+
+
+part_err_fcoef:
     if (fclose (fp) != 0)
     {
         return ERR_FCLOSE;
+    }
+    if (err_code != 0)
+    {
+        return err_code;
     }
 
     return 0;
@@ -115,7 +125,7 @@ int test_solve_square (const Coefficients* var_coef, const Test_data_roots* data
     }
     else
     {
-        my_puts ("Test-OK\n");
+        printf ("Test-OK\n");
 
         return 1;
     }

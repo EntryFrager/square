@@ -4,7 +4,7 @@
 #define ERROR_H
 
 #define my_assert(expr) if (!(expr)) {  \
-        fprintf(stderr, "%s:%d: My assertion failed: \"" #expr " on line \n", __func__, __LINE__); \
+        fprintf(stderr, "%s %s:%d: My assertion failed: \"" #expr "\"\n", __FILE__, __func__, __LINE__); \
         exit(1); \
     }
 
@@ -17,6 +17,6 @@ enum code_error {                               ///< Error codes.
     ERR_FCOEF = 3                               ///< Error when reading coefficients and correct roots from a file.
 };
 
-const char* error_str (unsigned code_error);    ///< Error return function.
+const char* my_strerr (unsigned code_error);    ///< Error return function.
 
 #endif // ERROR_H

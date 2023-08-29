@@ -32,9 +32,9 @@ bool is_zero (const double value)
 
 bool compare_number (const double value_1, const double value_2)
 {
-    my_assert (isfinite(value_1));
+    my_assert (isfinite (value_1));
 
-    my_assert (isfinite(value_2));
+    my_assert (isfinite (value_2));
 
     return ((value_1 - value_2) > EPSILON);
 }

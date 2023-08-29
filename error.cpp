@@ -26,7 +26,7 @@ static const char* err_msgs_arr[] = {
  * @param[in] code_error
 */
 
-const char* error_str (unsigned code_error)
+const char* my_strerr (unsigned code_error)
 {
     if (code_error < ERROR_CNT)
     {

@@ -91,7 +91,7 @@ int solve_dispetcher (const Coefficients* var_coef, Roots* var_roots)
 
     if (is_zero (var_coef->a))
     {
-        my_puts ("Твоё уравнение имеет линейный вид.\n");
+        printf ("Твоё уравнение имеет линейный вид.\n");
 
         return solve_linear (var_coef->b, var_coef->c, var_roots);
     }
@@ -144,7 +144,7 @@ int solve_square (const double a, const double b, const double c, Roots* var_roo
 
         return TWO_ROOTS;
     }
-    else if (is_zero(disc))
+    else if (is_zero (disc))
     {
         var_roots->x1 = var_roots->x2 = - b / (2 * a);
 

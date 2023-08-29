@@ -3,7 +3,6 @@
 #ifndef KVADRATKA_H
 #define KVADRATKA_H
 
-#include "kvadratka.h"
 #include "error.h"
 #include "str_function.h"
 
