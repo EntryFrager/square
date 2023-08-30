@@ -76,18 +76,13 @@ char* my_strncpy (char* dest, const char* src, size_t n)
     my_assert (dest != NULL);
     my_assert (src  != NULL);
 
-    size_t src_len = my_strlen (src);
+    char* dest_new = dest;
 
-    for (size_t i = 0; i < n; i++)
+    while (n > 0 && *src++ != '\0')
     {
-        if (i <= src_len)
-        {
-            dest[i] = src[i];
-        }
-        else
-        {
-            dest[i] = '0';
-        }
+        *dest_new++ = *src;
+
+        n--;
     }
 
     return dest;
@@ -134,6 +129,8 @@ char* my_strdup (const char* s)
 
     char* s_copy = (char *) malloc (sizeof(char) * s_len);
 
+    my_assert (s_copy != NULL);
+
     strncpy (s_copy, s, s_len);
 
     return s_copy;
@@ -143,15 +140,14 @@ char* my_strchr (const char* s, int c)
 {
     my_assert (s != NULL);
 
-    size_t s_len = my_strlen (s);
-
-    for (size_t i = 0; i <= s_len; i++)
+    while (*s++ != '\0')
     {
-        if (s[i] == c)
+        if (*s == c)
         {
-            return (char *) s + i;
+            return (char *) s;
         }
     }
+
     return NULL;
 }
 

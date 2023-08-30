@@ -65,15 +65,18 @@ int main ()
     char dest_12[40] = "abbcdef";
     strchr (dest_11, 100);
     my_strchr (dest_12, 100);
-    test_msg (strcmp (dest_11, dest_12) == 0, "my_strchr");
+
+    test_msg (*dest_11 == *dest_12, "my_strchr");
 
     char s1[] = "abcc", s2[] = "abcd";
     char s3[] = "abcc", s4[] = "abcd";
     strstr (s1, s2);
     my_strstr (s3, s4);
-    test_msg (strcmp (s1, s3) == 0, "my_strstr");
+
+    test_msg (strcmp (s1, s2), "my_strstr");
 
     char str1[40] = "abcdef", str2[40] = "abcdef";
     char str3[40] = "abcdef", str4[40] = "abcdef";
+
     test_msg (strcmp (str1, str2) == my_strcmp (str3, str4), "my_strcmp");
 }
