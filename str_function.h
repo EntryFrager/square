@@ -27,4 +27,6 @@ char* my_strstr (const char* s1, const char* s2);
 
 int my_strcmp (const char* s1, const char* s2);
 
+ssize_t my_getline (char ** lineptr, size_t *n, FILE *stream);
+
 #endif // STR_FUNCTION_H

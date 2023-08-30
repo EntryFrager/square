@@ -205,23 +205,15 @@ int my_strcmp (const char* s1, const char* s2)
 #if 0
 ssize_t getline (char ** lineptr, size_t *n, FILE *stream)
 {
-    for (size_t i = 0, i; i++)
-    {
-        fgets (*lineptr, 1, stream);
-        if i
-    }
+    size_t i = 0;
 
-    int i = 0;
-
-    while (fgets(*lineptr, 1, stream) != EOF)
+    while (fgets (*lineptr, 1, stream) != EOF)
     {
-        i++
         if (i == n)
+        {
+            realloc (*lineptr, *n + 1);
+        }
+        i++;
     }
-
-    do
-    {
-
-    } while (fgets;)
 }
 #endif

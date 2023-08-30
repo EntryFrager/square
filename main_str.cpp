@@ -79,4 +79,16 @@ int main ()
     char str3[40] = "abcdef", str4[40] = "abcdef";
 
     test_msg (strcmp (str1, str2) == my_strcmp (str3, str4), "my_strcmp");
+
+
+    #if 0
+    FILE *fp = fopen ("str.txt", 'r');
+    char str5[5] = "", str6[5] = "";
+    size_t byte = 10;
+
+    getline (&&str5, &byte, fp);
+    my_getline (&&str6, &byte, fp);
+
+    test_msg (strcmp (str5, str6) == 0, "my_getline");
+    #endif
 }
