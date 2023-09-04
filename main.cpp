@@ -1,18 +1,20 @@
 /// @file main.cpp
 
+#include <TXLib.h>
 #include <stdio.h>
 #include <math.h>
-#include <TXLib.h>
 #include <stdlib.h>
 #include <windows.h>
 #include <assert.h>
+
 #include "kvadratka.h"
 #include "test.h"
 #include "error.h"
 
 const char default_tests_src[] = "Test.txt";            ///< Default test file for testing the program.
 
-/** Main entry point of the program.
+/**
+ * Main entry point of the program.
  *  @param[in] argc
  *  @param[in] argv
 */
@@ -22,7 +24,7 @@ int main (int argc, const char *argv[])
     Roots var_roots = {};
     Coefficients var_coef = {};
 
-    my_puts ("Это программа решающая квадратные уравнения (ax^2 + bx + c = 0).\n");
+    printf ("Это программа решающая квадратные уравнения (ax^2 + bx + c = 0).\n");
 
     const char* test_filename = NULL;
 
@@ -34,7 +36,7 @@ int main (int argc, const char *argv[])
         {
             if (strlen (argv[i]) != 2)
             {
-                fprintf (stderr, "ERROR: ты ввел неправильныый формат параметра...\n");
+                fprintf (stderr, "ERROR: ты ввел неверный параметр... (и будешь убит)\n");
 
                 return 0;
             }
@@ -73,7 +75,7 @@ int main (int argc, const char *argv[])
     {
         if (test_filename == NULL)
         {
-            my_puts ("Будет использоваться дефолтный файл для тестов\n");
+            printf ("Будет использоваться дефолтный файл для тестов - Test.txt\n");
 
             test_filename = (char *) default_tests_src;
         }
@@ -82,7 +84,7 @@ int main (int argc, const char *argv[])
 
         if (code_error != 0)
         {
-            fprintf(stderr, "%s", error_str (code_error));
+            fprintf(stderr, "%s", my_strerr (code_error));
         }
     }
     else
